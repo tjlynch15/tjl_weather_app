@@ -36,12 +36,8 @@ class LocationViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         //locationManager.startUpdatingLocation()
         
-        if isLoadingViewController {
-            isLoadingViewController = false
-        }
-        else {
-             locationManager.requestLocation()
-        }
+        isLoadingViewController = true
+        locationManager.requestLocation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
