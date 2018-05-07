@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		DE0811BB2039D2A000FBCC13 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0811BA2039D2A000FBCC13 /* CircleView.swift */; };
+		DE164498209E22AD00426239 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE164497209E22AD00426239 /* ProgressView.swift */; };
+		DE16449A209F4D8900426239 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE164499209F4D8900426239 /* MyViewController.swift */; };
+		DE16449C209F71C100426239 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE16449B209F71C100426239 /* ForecastTableViewController.swift */; };
+		DE1644A0209F79BB00426239 /* WeatherPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE16449F209F79BB00426239 /* WeatherPageViewController.swift */; };
+		DE1644A2209F9AC100426239 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1644A1209F9AC100426239 /* ForecastTableViewCell.swift */; };
 		DE285A082095FF040009714F /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE285A072095FF040009714F /* LocationViewController.swift */; };
 		DE285A0B209602650009714F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE285A0A209602650009714F /* CoreLocation.framework */; };
 		DE285A0D209602950009714F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE285A0C209602950009714F /* MapKit.framework */; };
@@ -22,6 +27,11 @@
 
 /* Begin PBXFileReference section */
 		DE0811BA2039D2A000FBCC13 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		DE164497209E22AD00426239 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		DE164499209F4D8900426239 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		DE16449B209F71C100426239 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
+		DE16449F209F79BB00426239 /* WeatherPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageViewController.swift; sourceTree = "<group>"; };
+		DE1644A1209F9AC100426239 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		DE285A072095FF040009714F /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		DE285A0A209602650009714F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DE285A0C209602950009714F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -82,8 +92,13 @@
 				DE52CBDB20027C8D000BBB77 /* LocationsTableViewController.swift */,
 				DEEAE4D5203B1F4100169DD7 /* WeatherViewController.swift */,
 				DE0811BA2039D2A000FBCC13 /* CircleView.swift */,
-				DE285A072095FF040009714F /* LocationViewController.swift */,
 				DE52CBD9200279DB000BBB77 /* SharedNetworking.swift */,
+				DE164497209E22AD00426239 /* ProgressView.swift */,
+				DE164499209F4D8900426239 /* MyViewController.swift */,
+				DE285A072095FF040009714F /* LocationViewController.swift */,
+				DE16449B209F71C100426239 /* ForecastTableViewController.swift */,
+				DE1644A1209F9AC100426239 /* ForecastTableViewCell.swift */,
+				DE16449F209F79BB00426239 /* WeatherPageViewController.swift */,
 				DEDFD3541FFAFF07003BF7C5 /* Main.storyboard */,
 				DEDFD3571FFAFF07003BF7C5 /* Assets.xcassets */,
 				DEDFD3591FFAFF07003BF7C5 /* LaunchScreen.storyboard */,
@@ -172,8 +187,13 @@
 				DEEAE4D6203B1F4100169DD7 /* WeatherViewController.swift in Sources */,
 				DE0811BB2039D2A000FBCC13 /* CircleView.swift in Sources */,
 				DE52CBDC20027C8D000BBB77 /* LocationsTableViewController.swift in Sources */,
+				DE16449C209F71C100426239 /* ForecastTableViewController.swift in Sources */,
+				DE16449A209F4D8900426239 /* MyViewController.swift in Sources */,
 				DE285A082095FF040009714F /* LocationViewController.swift in Sources */,
+				DE164498209E22AD00426239 /* ProgressView.swift in Sources */,
 				DE52CBDA200279DB000BBB77 /* SharedNetworking.swift in Sources */,
+				DE1644A2209F9AC100426239 /* ForecastTableViewCell.swift in Sources */,
+				DE1644A0209F79BB00426239 /* WeatherPageViewController.swift in Sources */,
 				DEDFD3511FFAFF06003BF7C5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,7 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.terrencelynch.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -337,7 +357,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.terrencelynch.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MyWeather.xcodeproj">
+      location = "group:/Users/terry/Desktop/tjl_weather_app/MyWeather/MyWeather/ProgressView.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

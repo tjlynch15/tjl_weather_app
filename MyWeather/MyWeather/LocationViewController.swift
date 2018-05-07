@@ -12,9 +12,14 @@ import CoreLocation
 
 class LocationViewController: UIViewController {
     
+    static var newCity = "dog"
+    
+    var progressView: ProgressView? = ProgressView(frame: CGRect.zero)
+    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var altitudeLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    
     
     var issues:[String: [String:AnyObject]]?
     var issueDictionary: [String:Any] = [:]
@@ -27,17 +32,23 @@ class LocationViewController: UIViewController {
     
     var urlString = ""
     
+    static let notificationName = Notification.Name("myNotificationName")
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.addSubview(progressView!)
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        //locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         //locationManager.startUpdatingLocation()
         
         isLoadingViewController = true
         locationManager.requestLocation()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -78,10 +89,12 @@ extension LocationViewController : CLLocationManagerDelegate {
         }
     }
     
-    
+    // Get location latitude and longitude, get altitude and set altitude label text
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        SharedNetworking.sharedInstance.showNetworkIndicator()
+       
+        //print(progressView ?? "no pv")
+        progressView?.isHidden = false
+        print("false")
         
         if let location = locations.last {
             print("location:: \(location)")
@@ -90,21 +103,19 @@ extension LocationViewController : CLLocationManagerDelegate {
             print("altitude:: \(altitude)")
             
             let feetAlt = altitude * 3.2808
-            
             let roundAlt = String(format: "%.2f", feetAlt)
-            
             print("roundAlt: \(roundAlt)")
-            
             altitudeLabel.text = String(describing: roundAlt) + " ft"
             
             let myLatitude = location.coordinate.latitude
             let myLongitude = location.coordinate.longitude
-            print(myLatitude)
-            print(myLongitude)
             
             self.geocode(myLatitude, myLongitude)
         }
-        SharedNetworking.sharedInstance.hideNetworkIndicator()
+        
+//        progressView?.isHidden = true
+//        print("true")
+        
     }
 
     
@@ -113,10 +124,8 @@ extension LocationViewController : CLLocationManagerDelegate {
     }
     
 
+    // Convert latitude and longitude into placemark object
     func geocode(_ latitude: Double, _ longitude: Double) {
-        
-        print("geocode")
-        print(latitude, longitude)
         
         let lat = latitude
         let lng = longitude
@@ -129,7 +138,7 @@ extension LocationViewController : CLLocationManagerDelegate {
         // Create Location
         let location = CLLocation(latitude: lat, longitude: lng)
         
-        print(location)
+        print("geocode:  \(location)")
 
         // Geocode Location
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
@@ -145,10 +154,11 @@ extension LocationViewController : CLLocationManagerDelegate {
         }
     }
     
-    
+    // Get weather data for city (locality), state (administrative area), set city label and temp label
     func displayLocationInfo(placemark: CLPlacemark) {
         
-        print(placemark)
+        print()
+        print("placemark:  \(placemark)")
         var tempString : String = ""
         
         if (placemark.locality != nil) {
@@ -157,23 +167,25 @@ extension LocationViewController : CLLocationManagerDelegate {
         }
         if (placemark.administrativeArea != nil) {
             //cityLabel.text = placemark.locality
-            tempString = tempString + placemark.administrativeArea! + "\n"
+            tempString = tempString + placemark.administrativeArea!
         }
         
         cityLabel.text = tempString
-        print(tempString)
         
         let formattedCity = placemark.locality!.replacingOccurrences(of: " ", with: "%20")
-        print(formattedCity)
+        
+       
+        LocationViewController.newCity = formattedCity
+        
         
         let urlString = "https://api.wunderground.com/api/c20aa53f37c0654b/conditions/q/\(placemark.administrativeArea!)/\(formattedCity).json"
+        print()
         print(urlString)
         
         print("one")
-        
-        //SharedNetworking.sharedInstance.showNetworkIndicator()
-        
+        SharedNetworking.sharedInstance.showNetworkIndicator()
         print("two")
+        
         
         SharedNetworking.sharedInstance.getIssues(url: urlString) { (issues) in
             
@@ -194,13 +206,17 @@ extension LocationViewController : CLLocationManagerDelegate {
             DispatchQueue.main.async {
         
                 self.locationLabel.text = (self.issueDictionary["temp"] as? String)
+                
+                self.progressView?.isHidden = true
+                
+                SharedNetworking.sharedInstance.hideNetworkIndicator()
+                print("four")
+                
             }
             
             // For debugging
             //print(issues as Any)
             
-            print("four")
-            //SharedNetworking.sharedInstance.hideNetworkIndicator()
         }
     }
 
@@ -209,15 +225,7 @@ extension LocationViewController : CLLocationManagerDelegate {
         
         let numIssues = issues.count
         print("numIssues: \(numIssues)")
-        
-        //print(issues)
-        
-        print()
-        print(issues["current_observation"]!["display_location"]!["city"] as! String)
-        print(issues["current_observation"]!["icon"] as! String)
-        print(issues["current_observation"]!["icon_url"] as! String)
-        print(issues["current_observation"]!["weather"] as! String)
-        
+    
         issueDictionary = [String:Any]()
         
         var city = ""
@@ -234,16 +242,12 @@ extension LocationViewController : CLLocationManagerDelegate {
             icon_url = (issues["current_observation"]!["icon_url"] as! String)
             weather = (issues["current_observation"]!["weather"] as! String)
             
-            //icon_url = "http://icons.wxug.com/i/c/i/" + icon + ".gif"
-            //print(icon_url)
-            
             issueDictionary = ["city":city, "temp":temp, "icon":icon, "icon_url":icon_url, "weather":weather]
         }
     }
+    
+    
 }
-
-
-
 
 
 
