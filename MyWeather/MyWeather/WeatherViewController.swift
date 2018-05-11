@@ -101,19 +101,6 @@ class WeatherViewController: UIViewController {
         view.addSubview(button2)
         
         
-//        label2.frame = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 100, height: 100)
-//        label2.center = self.button1.center
-//        label2.textAlignment = .center
-//        label2.text = "Temp"
-//        label2.backgroundColor = UIColor.clear
-//        label2.textColor = UIColor.white
-//        view.addSubview(label2)
-        
-        
-        
-        
-        
-        
         SharedNetworking.sharedInstance.showNetworkIndicator()
         
         SharedNetworking.sharedInstance.getIssues(url: urlString) { (issues) in
