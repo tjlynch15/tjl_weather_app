@@ -13,6 +13,7 @@ import CoreLocation
 class LocationViewController: UIViewController {
     
     static var newCity = "dog"
+    static var newState = "cat"
     
     var progressView: ProgressView? = ProgressView(frame: CGRect.zero)
     
@@ -173,7 +174,7 @@ extension LocationViewController : CLLocationManagerDelegate {
         cityLabel.text = tempString
         
         let formattedCity = placemark.locality!.replacingOccurrences(of: " ", with: "%20")
-        
+        LocationViewController.newState = placemark.administrativeArea!
        
         LocationViewController.newCity = formattedCity
         

@@ -11,19 +11,18 @@ import UIKit
 class ForecastTableViewController: UITableViewController {
     
     
-    var days = ["Monday", "Tuesday", "Wednesday", "Thursday"]
-    
     /// The array of dictionaries that will hold all weather
     /// data returned from the network request
     var issues:[String: [String:AnyObject]]?
     
-    var dataDictionary = Dictionary<String, Any>()
+    //var dataDictionary = Dictionary<String, Any>()
     
-    var forecastDictionaryArray:[[String: String]]?
+    var forecastDictionaryArray =  [Dictionary<String, String>]()
     
+    var urlString = "https://api.wunderground.com/api/c20aa53f37c0654b/forecast10day/q/IL/Glencoe.json"
     
-    //var urlString = ""
-    let urlString = "https://api.wunderground.com/api/c20aa53f37c0654b/forecast10day/q/IL/Glencoe.json"
+    //let urlString = "https://api.wunderground.com/api/c20aa53f37c0654b/forecast10day/q/\(LocationViewController.newState)/\(LocationViewController.newCity)"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +34,19 @@ class ForecastTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         
+        print("urlString1: \(urlString)")
+        
         SharedNetworking.sharedInstance.showNetworkIndicator()
         
         SharedNetworking.sharedInstance.getIssues(url: urlString) { (issues) in
             
+            self.urlString = "https://api.wunderground.com/api/c20aa53f37c0654b/forecast10day/q/\(LocationViewController.newState)/\(LocationViewController.newCity)"
+            
+            print()
+            print("urlString2: \(self.urlString)")
+            
             self.createDictionary(issues: issues! as! [String : [String : AnyObject]])
-            print("HI \(String(describing: self.forecastDictionaryArray))")
+            //print("HI \(String(describing: self.forecastDictionaryArray))")
             
             // The data is available in this closure through the `issues` variable
             
@@ -68,9 +74,7 @@ class ForecastTableViewController: UITableViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
-        
     }
     
     
@@ -88,7 +92,7 @@ class ForecastTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (forecastDictionaryArray?.count)!
+        return forecastDictionaryArray.count
     }
     
     
@@ -99,16 +103,11 @@ class ForecastTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ForecastTableViewCell  else {fatalError("The dequeued cell is not an instance of ForecastTableViewCell")
         }
         
-    
-        print()
-        print(forecastDictionaryArray![0]["day"]!)
-        print()
-        print(forecastDictionaryArray![1]["day"]!)
-        print()
+        //print("city: \(LocationViewController.newCity)")
+        cell.dayLabel?.text = forecastDictionaryArray[indexPath.row]["day"]
+        cell.highLabel?.text = forecastDictionaryArray[indexPath.row]["highTempF"]
+        cell.lowLabel?.text = forecastDictionaryArray[indexPath.row]["lowTempF"]
         
-        
-        print("city: \(LocationViewController.newCity)")
-        cell.dayLabel?.text = LocationViewController.newCity
         return cell
         
     }
@@ -186,29 +185,19 @@ class ForecastTableViewController: UITableViewController {
             let highTemp = forecastDay[index]["high"] as! [String:Any]?
             highTempF = highTemp!["fahrenheit"] as! String
             
-            print()
-            print("day: \(index)")
-            print("weekday: \(day )")
-            print("lowTempF: \(lowTempF )")
-            print("highTempF: \(highTempF )")
+//            print()
+//            print("day: \(index)")
+//            print("weekday: \(day )")
+//            print("lowTempF: \(lowTempF )")
+//            print("highTempF: \(highTempF )")
             
             let dict = ["day":day, "lowTempF":lowTempF, "highTempF":highTempF]
-            print(dict)
+//            print(dict)
             
-            forecastDictionaryArray?.append(dict)
+            forecastDictionaryArray.append(dict)
         }
         
-        print()
-        print(forecastDictionaryArray as Any)
-        print()
-        print(forecastDictionaryArray![0]["day"]!)
-        print()
-        print(forecastDictionaryArray![1]["day"]!)
-        print()
-        
     }
-  
-    
 }
 
 
