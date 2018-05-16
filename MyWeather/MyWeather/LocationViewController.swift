@@ -15,6 +15,15 @@ class LocationViewController: UIViewController {
     static var newCity = "dog"
     static var newState = "cat"
     
+    
+//    var myProperty: Int = 0 {
+//        didSet {
+//            print("The value of myProperty changed from \(oldValue) to \(myProperty)")
+//        }
+//    }
+    
+    
+    
     var progressView: ProgressView? = ProgressView(frame: CGRect.zero)
     
     @IBOutlet weak var locationLabel: UILabel!

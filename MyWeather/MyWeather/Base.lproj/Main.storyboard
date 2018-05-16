@@ -154,12 +154,17 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TAz-BW-bEy">
+                                            <rect key="frame" x="170" y="5" width="34" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.84465640779999995" green="0.51457053419999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dayLabel" destination="uRG-tw-HOW" id="ewc-cf-yJT"/>
                                     <outlet property="highLabel" destination="ojs-iK-Sko" id="RYd-B3-bKe"/>
+                                    <outlet property="iconImageView" destination="TAz-BW-bEy" id="5b4-X1-1WN"/>
                                     <outlet property="lowLabel" destination="hWs-PK-xaY" id="ytf-5J-FdL"/>
                                 </connections>
                             </tableViewCell>
@@ -169,6 +174,9 @@
                             <outlet property="delegate" destination="JNi-RR-NwT" id="7aW-NM-XhT"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="bWc-0U-rgQ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1kS-j5-PXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

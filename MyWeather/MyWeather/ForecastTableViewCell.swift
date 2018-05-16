@@ -14,6 +14,9 @@ class ForecastTableViewCell: UITableViewCell {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var highLabel: UILabel!
     @IBOutlet weak var lowLabel: UILabel!
+    @IBOutlet weak var iconImageView: UIImageView!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
