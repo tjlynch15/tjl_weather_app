@@ -33,12 +33,25 @@ class MyViewController: UIViewController {
         scrollView.contentSize = CGSize(width: 1000, height: scrollView.frame.height)
         
         // Put a box at the end of the scrollview
-        let box = UIView(frame: CGRect(x: 900,y: 50, width: 50, height: 50))
-        box.backgroundColor = UIColor.green
+        let boxOne = UIView(frame: CGRect(x: 100, y: scrollView.frame.midX,  width: 100, height: 100))
+        
+        let swiftColor = UIColor(red: 215/255.0, green: 131/255.0, blue: 255/255.0, alpha: 1)
+        boxOne.backgroundColor = swiftColor
+       
         
         // Add the box to the view...careful of which view you
         // add it to...
-        scrollView.addSubview(box)
+        scrollView.addSubview(boxOne)
+        
+        
+        
+        // Put a box at the end of the scrollview
+        let boxTwo = UIView(frame: CGRect(x: 900,y: 150, width: 50, height: 50))
+        boxTwo.backgroundColor = UIColor.green
+        
+        // Add the box to the view...careful of which view you
+        // add it to...
+        scrollView.addSubview(boxTwo)
         
         
         
